@@ -5,12 +5,29 @@ import { useState } from "react";
 
 function App() {
   const [processes, setProcesses] = useState([]);
+  const [result, setResult] = useState();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState();
 
   return (
     <>
-      <Form processes={processes} setProcesses={setProcesses} />
-      <Queue />
-      <Results />
+      <Form
+        processes={processes}
+        setProcesses={setProcesses}
+        result={result}
+        setResult={setResult}
+        setLoading={setLoading}
+        setError={setError}
+      />
+      <Queue loading={loading} />
+      <Results
+        error={error}
+        result={result}
+        processes={processes}
+        setProcesses={setProcesses}
+        setResult={setResult}
+        setError={setError}
+      />
     </>
   );
 }

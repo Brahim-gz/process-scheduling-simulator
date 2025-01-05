@@ -1,5 +1,50 @@
 .bottom-div {
-    border-top: solid 5px black;
-    border-radius: 1.5em;
-    padding-top: 3em;
+  border-top: solid 5px black;
+  border-radius: 1.5em;
+  padding-top: 3em;
+}
+.flex-bloc {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.wrapper {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.optimum {
+  width: 70%;
+  padding: 0.6em;
+  border: 0.2em black solid;
+  border-radius: 0.6em;
+  box-shadow: 0.2em 0.2em 0.7em 0 rgb(0, 0, 0, 0.2);
+  outline: none;
+  font-size: x-large;
+  text-align: center;
+  color: black;
+  font-family: "Mulish", serif;
+  font-optical-sizing: auto;
+  font-weight: bolder;
+  font-style: normal;
+}
+
+#ButtonError {
+  background: red;
+  box-shadow: inset 0 0 1.6em -0.6em rgb(249, 99, 99);
+  height: 5em;
+}
+
+#ButtonError .iconButton {
+  box-shadow: 0.1em 0.1em 0.6em 0.2em rgb(181, 75, 75);
+}
+
+#ButtonError:hover {
+  box-shadow: 0.15em 0.15em rgba(246, 129, 129, 0.581);
+}
+#ButtonError:active {
+  box-shadow: 0.05em 0.05em rgba(246, 129, 129, 0.581);
 }

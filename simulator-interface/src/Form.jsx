@@ -1,12 +1,19 @@
 import { useState } from "react";
 import "./Form.css";
 
-const Form = ({ processes, setProcesses }) => {
+const Form = ({
+  processes,
+  setProcesses,
+  result,
+  setResult,
+  setLoading,
+  setError,
+}) => {
   const [priority, setPriority] = useState();
   const [duration, setDuration] = useState();
   const [time, setTime] = useState();
   const [invalid, setInvalid] = useState([false, false, false]);
-  const [error, setError] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
 
   const handleChange = (e, i) => {
     const { value, validity } = e.target;
@@ -22,7 +29,7 @@ const Form = ({ processes, setProcesses }) => {
         break;
       case 2:
         setTime(value);
-        setError("");
+        setErrorMsg("");
         setInvalid([invalid[0], invalid[1], !validity.valid]);
         break;
     }
@@ -34,7 +41,7 @@ const Form = ({ processes, setProcesses }) => {
       parseFloat(processes[processes.length - 1].time) > parseFloat(time)
     ) {
       setTime("");
-      setError(
+      setErrorMsg(
         "The value of the arrival time must be greater than or equal to the arrival time of the process's prior."
       );
       return;
@@ -50,7 +57,29 @@ const Form = ({ processes, setProcesses }) => {
     setDuration("");
     setTime("");
   };
-
+  const fetchResult = async () => {
+    setError()
+    setLoading(true);
+    let url = "http://127.0.0.1:5000/api?";
+    for (let i = 0; i < processes.length; i++) {
+      if (i != 0) url += "&";
+      url += "Plist=" + processes[i].priority;
+      url += "&Dlist=" + processes[i].duration;
+      url += "&Alist=" + processes[i].time;
+    }
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error("Failed to fetch results");
+      }
+      const res = await response.json();
+      setResult(res);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <div className="top-div">
       <div className="form">
@@ -89,7 +118,7 @@ const Form = ({ processes, setProcesses }) => {
             title="Please enter a number greater than or equal to 0 and greater than the arrival time of the process's prior"
           />
         </div>
-        {error && <span style={{ color: "red" }}>{error}</span>}
+        {errorMsg && <span style={{ color: "red" }}>{errorMsg}</span>}
         <div className="flex-div">
           <button
             className="Button"
@@ -97,7 +126,8 @@ const Form = ({ processes, setProcesses }) => {
               !(priority && duration && time) ||
               invalid[0] ||
               invalid[1] ||
-              invalid[2]
+              invalid[2] ||
+              result
             }
             onClick={addProcess}
           >
@@ -120,7 +150,11 @@ const Form = ({ processes, setProcesses }) => {
               </svg>
             </div>
           </button>
-          <button className="Button" disabled={processes.length < 2}>
+          <button
+            className="Button"
+            disabled={processes.length < 2 || result}
+            onClick={fetchResult}
+          >
             Minimize the waiting time
             <div className="iconButton">
               <svg

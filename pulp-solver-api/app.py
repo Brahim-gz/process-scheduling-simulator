@@ -1,8 +1,9 @@
 from flask import Flask,request,jsonify
 from Solver import Solve
+from flask_cors import CORS
 
 app = Flask(__name__)
-
+CORS(app) # Allow all origins by default
 
 @app.route('/api')
 def api():
