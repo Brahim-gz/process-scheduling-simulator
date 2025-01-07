@@ -11,8 +11,8 @@ const Results = ({
 }) => {
   const reset = () => {
     setError();
-    setResult();
     setProcesses([]);
+    setResult();
   };
 
   return (
@@ -56,13 +56,28 @@ const Results = ({
                 </g>
               </svg>
             )}
-            {error && <p style={{ color: "red",fontSize:"x-large",fontWeight:"bolder" }}>{error}</p>}
+            {error && (
+              <p
+                style={{
+                  color: "red",
+                  fontSize: "x-large",
+                  fontWeight: "bolder",
+                }}
+              >
+                {error}
+              </p>
+            )}
             {result && (
               <div className="optimum">
-                the minimal average waiting time is {result["OPT"].toFixed(2)}s
+                the minimal average waiting time is{" "}
+                {result["OPT"] > 0 ? result["OPT"].toFixed(2) : 0}s
               </div>
             )}
-            <button className="Button" id={error ? "ButtonError" : ""} onClick={reset}>
+            <button
+              className="Button"
+              id={error ? "ButtonError" : ""}
+              onClick={reset}
+            >
               Reset Queue
               <div className="iconButton">
                 <svg

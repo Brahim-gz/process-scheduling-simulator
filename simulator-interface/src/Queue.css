@@ -1,3 +1,155 @@
 .queue {
-    height: 8em;
+  height: 10em;
+  display: flex;
+  align-items: center;
+  padding-left: 1em;
+  gap: 0.25em;
+  overflow-x: scroll;
+  scrollbar-width: none;
+  transition: filter 0.5s;
+}
+.queue::-webkit-scrollbar {
+  display: none;
+}
+.PBC:last-child {
+  animation: enqueue 3s forwards;
+}
+.new-PBC {
+  animation: enqueue 3s forwards;
+}
+.out {
+  animation: dequeue 3s forwards;
+}
+
+@keyframes enqueue {
+  0% {
+    transform: translateX(100em);
+  }
+  100% {
+    transform: translateX(0em);
+  }
+}
+@keyframes dequeue {
+  0% {
+    transform: translateX(0em);
+    position: relative;
+  }
+  50% {
+    transform: translateX(-50em);
+    position: absolute;
+  }
+  100% {
+    transform: translateX(-100em);
+    position: absolute;
+  }
+}
+.PBC,
+.out,
+.new-PBC {
+  perspective: 1000px; /* Creates a 3D space for the flip effect */
+  min-width: 11em;
+  height: 8em;
+}
+
+.PBC .flip-card,
+.new-PBC .flip-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d; /* Ensures both sides are shown in 3D space */
+  transition: transform 0.6s;
+  border-radius: 1em;
+  box-sizing: border-box;
+}
+
+.front,
+.back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden; /* Hides the back side when flipped */
+  border-radius: 1em;
+  box-sizing: border-box;
+}
+
+.back {
+  transform: rotateY(180deg); /* Initially hide the back side */
+}
+
+.front {
+  background-color: #ae445a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: x-large;
+}
+
+.new-PBC .front {
+  background-color: #5D8736;
+}
+.new-PBC .back {
+  background-color: #A9C46C;
+  border: solid 4px #5D8736;
+}
+
+.PBC:hover .flip-card,
+.new-PBC:hover .flip-card {
+  transform: rotateY(180deg); /* Flips the card on hover */
+}
+.loading {
+  --speed-of-animation: 0.9s;
+  --gap: 6px;
+  --first-color: #4c86f9;
+  --second-color: #49a84c;
+  --third-color: #f6bb02;
+  --fourth-color: #f6bb02;
+  --fifth-color: #2196f3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  gap: 6px;
+  height: 100px;
+}
+
+.loading span {
+  width: 4px;
+  height: 50px;
+  background: var(--first-color);
+  animation: scale var(--speed-of-animation) ease-in-out infinite;
+}
+
+.loading span:nth-child(2) {
+  background: var(--second-color);
+  animation-delay: -0.8s;
+}
+
+.loading span:nth-child(3) {
+  background: var(--third-color);
+  animation-delay: -0.7s;
+}
+
+.loading span:nth-child(4) {
+  background: var(--fourth-color);
+  animation-delay: -0.6s;
+}
+
+.loading span:nth-child(5) {
+  background: var(--fifth-color);
+  animation-delay: -0.5s;
+}
+
+@keyframes scale {
+  0%,
+  40%,
+  100% {
+    transform: scaleY(0.05);
+  }
+
+  20% {
+    transform: scaleY(1);
+  }
 }

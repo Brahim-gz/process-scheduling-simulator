@@ -14,6 +14,7 @@ const Form = ({
   const [time, setTime] = useState();
   const [invalid, setInvalid] = useState([false, false, false]);
   const [errorMsg, setErrorMsg] = useState("");
+  const [animate, setAnimate] = useState(false);
 
   const handleChange = (e, i) => {
     const { value, validity } = e.target;
@@ -46,6 +47,7 @@ const Form = ({
       );
       return;
     }
+    setAnimate(true);
     const newProcess = {
       pid: processes.length + 1,
       priority: priority,
@@ -53,12 +55,15 @@ const Form = ({
       time: time,
     };
     setProcesses([...processes, newProcess]);
+    setTimeout(() => {
+      setAnimate(false);
+    }, 3000);
     setPriority("");
     setDuration("");
     setTime("");
   };
   const fetchResult = async () => {
-    setError()
+    setError();
     setLoading(true);
     let url = "http://127.0.0.1:5000/api?";
     for (let i = 0; i < processes.length; i++) {
@@ -76,8 +81,12 @@ const Form = ({
       setResult(res);
     } catch (err) {
       setError(err.message);
+      setProcesses([]);
+      setLoading(false)
     } finally {
-      setLoading(false);
+      setTimeout(() => {
+        setLoading(false);
+      }, 3000);
     }
   };
   return (
@@ -193,6 +202,27 @@ const Form = ({
             </div>
           </button>
         </div>
+      </div>
+      <div
+        className={
+          processes.length > 0 ? (animate ? "animate" : "bloc") : "initial"
+        }
+        style={result && {visibility:"hidden"}}
+      >
+        <span>
+          <b>Priority : </b>
+          {!invalid[0] && priority}
+        </span>
+        <hr />
+        <span>
+          <b>E. Duration : </b>
+          {!invalid[1] && duration && duration + "s"}
+        </span>
+        <hr />
+        <span>
+          <b>A. Time : </b>
+          {!invalid[2] && time}
+        </span>
       </div>
     </div>
   );

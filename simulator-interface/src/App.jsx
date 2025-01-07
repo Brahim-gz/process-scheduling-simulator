@@ -19,7 +19,7 @@ function App() {
         setLoading={setLoading}
         setError={setError}
       />
-      <Queue loading={loading} />
+      <Queue processes={processes} loading={loading} result={result} />
       <Results
         error={error}
         result={result}
