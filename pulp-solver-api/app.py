@@ -12,7 +12,6 @@ def api():
     Plist = [ int(x) for x in request.args.getlist("Plist")]
     Dlist = [ float(x) for x in request.args.getlist("Dlist")]
     Alist = [ float(x) for x in request.args.getlist("Alist")]
-
     #Solve the LP
     res = Solve(Plist,Dlist,Alist)
 
