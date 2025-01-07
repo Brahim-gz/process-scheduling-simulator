@@ -9,7 +9,7 @@ def Solve(Plist : list, Dlist : list, Alist : list) -> dict:
     #Add parameters
 
     n = len(Plist)
-    M = 1000
+    M = 100
     params = {}
     for i in range(n):
         params[f"P{i+1}"] = Plist[i]
@@ -25,7 +25,7 @@ def Solve(Plist : list, Dlist : list, Alist : list) -> dict:
     for i in range(1,n+1):
         for j in range(1,n+1):
             if i != j :
-                variables[f"x{i}{j}"] = LpVariable(f"x{i}{j}", cat=LpInteger, lowBound=0)
+                variables[f"x{i}{j}"] = LpVariable(f"x{i}{j}", cat=LpBinary, lowBound=0)
         variables[f"TD{i}"] = LpVariable(f"TD{i}", lowBound=0)
         variables[f"TF{i}"] = LpVariable(f"TF{i}", lowBound=0)
 
