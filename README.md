@@ -1,20 +1,35 @@
+<a href="https://github.com/Brahim-gz/process-scheduling-simulator/blob/main/LICENSE">
+  <img align=right src="https://img.shields.io/github/license/Brahim-gz/process-scheduling-simulator?style=flat" alt="License" />
+</a>
+
+<br/>
+<br/>
+
 # Process Scheduling Simulator
 
-## Overview
-
-This repository contains a simulator designed to optimize the scheduling of processes in a queue using linear programming techniques. The simulator is part of a project for the Operations Research (OR) module and addresses scheduling problems by prioritizing processes based on their priority and execution time, using the Shortest Job Next (SJN) algorithm for modeling.
+This repository contains a simulator aimed at optimizing process scheduling in a queue. It uses linear programming techniques to prioritize and organize tasks efficiently. The simulator is part of a project for the Operations Research (OR) module and addresses scheduling problems by prioritizing processes based on their priority, execution time, and arrival time. It leverages the Shortest Job Next (SJN) algorithm for modeling, which prioritizes processes with the shortest execution time to minimize overall waiting time. Additionally, the project includes dynamic visualizations for user interaction.
 
 The project includes:
 
 - A **Flask-based API** for backend processing.
 - A **React and CSS-based frontend** for user interaction.
+- Visual tools such as **ApexCharts** for displaying scheduling results and performance metrics.
 
-## Key Features
+## Features
 
-- Enables users to input process details such as priority and execution time.
-- Utilizes a linear programming model to optimize the process queue.
-- Outputs an optimized schedule with details like the average waiting time.
-- Includes robust error handling to manage invalid inputs gracefully.
+🚀 **Interactive Input**: Users can input process details such as priority, arrival time, and execution time through an intuitive interface.
+
+📊 **Linear Programming Optimization**: The backend employs linear programming to optimize the process queue and minimize metrics like average waiting time.
+
+🎨 **Dynamic Visualizations**: Results are presented through interactive charts and animations, making the output easy to understand.
+
+❗ **Error Handling**: Robust validation for managing invalid inputs and handling algorithmic issues gracefully.
+
+♻ **Reset Functionality**: Allows users to clear the queue and restart simulations easily.
+
+## Demo
+
+![Demo GIF](https://github.com/Brahim-gz/process-scheduling-simulator/blob/main/assets/Demo.gif)
 
 ## Installation
 
@@ -22,8 +37,8 @@ The project includes:
 
 Ensure you have the following installed:
 
-- Python (>=3.8)
-- Node.js (>=14)
+- [Python (>=3.8)](https://www.python.org/downloads/)
+- [Node.js (>=14)](https://nodejs.org/)
 
 ### Backend Setup
 
@@ -61,9 +76,15 @@ Ensure you have the following installed:
    npm start
    ```
 
-## Usage Instructions
+## Usage
 
-1. Start both the backend and frontend servers.
-2. Access the simulator through the frontend interface in your web browser (default: `http://localhost:3000`).
-3. Enter process details such as arrival time, priority, and execution time.
-4. Submit the data to view an optimized schedule and related details.
+💡Start both the backend and frontend servers.
+
+💡Access the simulator through the frontend interface in your web browser (default: `http://localhost:3000`).
+
+💡Enter process details such as arrival time, priority, and execution time.
+
+💡Submit the data to view an optimized schedule, dynamic animations, and performance metrics such as average waiting time.
+
+💡Reset the queue as needed to start new simulations.
+
